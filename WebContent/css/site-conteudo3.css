@@ -1,0 +1,29 @@
+#conteudo1{
+	float : left;
+	height: 560px;
+	width: 320px;
+	margin-bottom: 11px;
+	border-radius: 20px;
+	padding: 7px 7px 7px 7px;
+	background-color: #ffcc33;
+}
+#conteudo2{
+	float : left;
+	height: 560px;
+	width: 320px;
+	margin-bottom: 11px;
+	margin-left: 11px;
+	border-radius: 20px;
+	padding: 7px 7px 7px 7px;
+	background-color: #ffd966;
+}
+#conteudo3{
+	float : left;
+	height: 560px;
+	width: 320px;
+	margin-bottom: 11px;
+ 	margin-left: 11px;
+ 	border-radius: 20px;
+	padding: 7px 7px 7px 7px;
+ 	background-color: #ffe699;
+}

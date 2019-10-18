@@ -1,0 +1,47 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+	<persistence-unit name="supernaturalPU"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Anjo</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Arma</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Bruxa</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Cacada</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Cacador</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Ceu</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Criatura</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Demonio</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Encruzilhada</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Evento</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Fantasma</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Feitico</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Habilidade</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Inferno</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Ingrediente</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Lugar</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Natural</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Pacto</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Purgatorio</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Ritual</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Ser</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Sobrenatural</class>
+		<class>br.edu.unifei.ecoe18.supernatural.model.Terra</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/supernatural?zeroDateTimeBehavior=convertToNull" />
+			<property name="javax.persistence.jdbc.user" value="supernatural" />
+			<property name="javax.persistence.jdbc.driver"
+				value="org.mariadb.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.password"
+				value="supernatural" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MariaDBDialect" />
+			<property
+				name="javax.persistence.schema-generation.database.action"
+				value="none" />
+		</properties>
+	</persistence-unit>
+</persistence>
