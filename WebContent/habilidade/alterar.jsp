@@ -15,23 +15,19 @@
 <div id="navegacao">
 <ul class="menulist ">
 	<li class="menuitem">
-	<a href="#home">Home</a></li>
+	<a href="../index.html">Home</a></li>
 	<li class="menuitem dropdown">
-		<a href="#" class="dropbutton">Cadastro</a>
+		<a href="#" class="dropbutton">CRUD</a>
 		<div class="dropdown-content">
 			<a href="menu.html">Habilidade</a>
 	</div></li>
-	<li class="menuitem">
-	<a href="#contact">Galeria</a></li>
-	<li class="menuitem">
-	<a href="#about">Contato</a></li>
 </ul>
 </div>
 <div id="conteudo1">
-	<p><a href="inserir-form.html">inserir</a></p>
-	<p><a href="alterar-busca.html">alterar</a></p>
-	<p><a href="excluir-busca.html">excluir</a></p>
-	<p><a href="consultar-busca.html">consultar</a></p>
+	<p><a href="alterar-busca.html">Alterar</a></p>
+	<p><a href="consultar-busca.html">Consultar</a></p>
+	<p><a href="excluir-busca.html">Excluir</a></p>
+	<p><a href="inserir-form.html">Inserir</a></p>
 </div>
 <div id="conteudo2">
 	<%	
@@ -42,15 +38,17 @@
 		em.getTransaction().begin();
 		em.merge(h);
 		em.getTransaction().commit();
-		out.println("Habilidade alterada");		
+		out.println("<h3>Habilidade alterada com sucesso!</h3>");		
 	}else{
-		out.println("nome de habilidade não existe");
+		out.println("<h3>Nome de habilidade não existe!</h3>");
 	}
 	%>
 </div>
 </div>
 <div id="rodape">
-<div id="rodape-tudo"></div>
+<div id="rodape-tudo">
+	<h4>Trabalho hipermidia JSP baseado na série Supernatural</h4>
+	<p>José Marcel Mendes Nogueira - 2016</p></div>
 </div>
 </body>
 </html>

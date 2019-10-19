@@ -15,23 +15,19 @@
 <div id="navegacao">
 <ul class="menulist ">
 	<li class="menuitem">
-	<a href="#home">Home</a></li>
+	<a href="..">Home</a></li>
 	<li class="menuitem dropdown">
 		<a href="#" class="dropbutton">Cadastro</a>
 		<div class="dropdown-content">
 			<a href="menu.html">Habilidade</a>
 	</div></li>
-	<li class="menuitem">
-	<a href="#contact">Galeria</a></li>
-	<li class="menuitem">
-	<a href="#about">Contato</a></li>
 </ul>
 </div>
 <div id="conteudo1">
-	<p><a href="inserir-form.html">inserir</a></p>
-	<p><a href="alterar-busca.html">alterar</a></p>
-	<p><a href="excluir-busca.html">excluir</a></p>
-	<p><a href="consultar-busca.html">consultar</a></p>
+	<p><a href="alterar-busca.html">Alterar</a></p>
+	<p><a href="consultar-busca.html">Consultar</a></p>
+	<p><a href="excluir-busca.html">Excluir</a></p>
+	<p><a href="inserir-form.html">Inserir</a></p>
 </div>
 <div id="conteudo2">
 	<%	
@@ -47,17 +43,19 @@
 		em.getTransaction().begin();
 		em.persist(h);
 		em.getTransaction().commit();
-		out.println("Habilidade inserido");		
+		out.println("<h3>Habilidade inserido com sucesso!</h3>");		
 	}catch(Exception ex){
 		if (ex instanceof RollbackException){
-			out.println("nome de habilidade já existe");
+			out.println("<h3>Nome de habilidade já existe!</h3>");
 		}
 	}
 	%>
 </div>
 </div>
 <div id="rodape">
-<div id="rodape-tudo"></div>
+<div id="rodape-tudo">
+	<h4>Trabalho hipermidia JSP baseado na série Supernatural</h4>
+	<p>José Marcel Mendes Nogueira - 2016</p></div>
 </div>
 </body>
 </html>

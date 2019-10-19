@@ -36,6 +36,10 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+#conteudo2 p{
+	font-size: 14pt;
+}
+
 #conteudo2 label {
 	color: #00b7c9;
 	font-weight: 600;
