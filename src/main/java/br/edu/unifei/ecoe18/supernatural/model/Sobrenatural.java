@@ -13,9 +13,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public abstract class Sobrenatural extends Ser {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8173591603658248705L;
 	private String fraqueza;
 	@ManyToMany

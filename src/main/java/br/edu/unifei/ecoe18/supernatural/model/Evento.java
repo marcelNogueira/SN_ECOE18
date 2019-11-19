@@ -11,9 +11,6 @@ import lombok.Data;
 @Data
 @Entity
 public abstract class Evento implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1912875856381085672L;
 	@Id
 	@GeneratedValue

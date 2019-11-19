@@ -12,9 +12,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Ingrediente implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 135352444182227414L;
 	@Id
 	private String nome;

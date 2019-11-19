@@ -14,9 +14,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Cacada extends Evento {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2987417941951645446L;
 	@OneToMany
 	private List<Natural> vitimas = new ArrayList<>();

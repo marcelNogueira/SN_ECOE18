@@ -11,9 +11,6 @@ import lombok.Data;
 @Data
 @Entity
 public abstract class Lugar implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3919411553431398111L;
 	@Id
 	@GeneratedValue
