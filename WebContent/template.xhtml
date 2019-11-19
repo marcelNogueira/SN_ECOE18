@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+  <h:outputStylesheet library="css" name="site.css"  />
+  <title>
+  	<ui:insert name="title">Default title</ui:insert>
+  </title>
+</h:head>
+<h:body>
+<div id="tudo">
+<div id="navegacao">
+<ul class="menulist ">
+	<li class="menuitem">
+	<a href="#home">Home</a></li>
+	<li class="menuitem dropdown">
+		<a href="#" class="dropbutton">Cadastro</a>
+		<div class="dropdown-content">
+			<!-- <h:form>
+			<h:commandLink value="Acessorio" 
+			action="acessorio/menu.xhtml"/>
+			<h:commandLink value="Edificação" 
+			action="edificacao/menu.xhtml"/>
+			</h:form> -->
+	</div></li>
+	<li class="menuitem">
+	<a href="#contact">Galeria</a></li>
+	<li class="menuitem">
+	<a href="#about">Contato</a></li>
+</ul>
+</div>
+<div id="conteudo1">
+  <ui:insert name="conteudo1"></ui:insert>
+</div>
+<div id="conteudo2">
+  <ui:insert name="conteudo2"></ui:insert>
+</div>
+</div>
+<div id="rodape">
+<div id="rodape-tudo"></div>
+</div>
+</h:body>
+</html>
