@@ -10,9 +10,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Ceu extends Lugar {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8739432852385474597L;
 	@OneToOne
 	private static final Ceu instancia = new Ceu();
@@ -21,4 +18,8 @@ public class Ceu extends Lugar {
 	private Ceu() {
 	}
 
+	public static Ceu getInstancia() {
+		return instancia;
+	}
+	
 }

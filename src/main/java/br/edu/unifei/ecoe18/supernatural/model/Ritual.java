@@ -14,9 +14,6 @@ import lombok.Data;
 @Data
 @Entity
 public class Ritual implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2350206611857182093L;
 	@Id
 	@GeneratedValue

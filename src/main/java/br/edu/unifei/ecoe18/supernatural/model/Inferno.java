@@ -10,9 +10,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Inferno extends Lugar {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5488688314258478470L;
 	@OneToOne
 	private static final Inferno instancia = new Inferno();
@@ -22,5 +19,9 @@ public class Inferno extends Lugar {
 
 	}
 
+	public static Inferno getInstancia() {
+		return instancia;
+	}
 
+	
 }

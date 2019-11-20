@@ -10,9 +10,6 @@ import lombok.Data;
 @Data
 @Entity
 public class Arma implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4302986000845612689L;
 	@Id
 	private String nome;

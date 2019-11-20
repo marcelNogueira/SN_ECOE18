@@ -10,9 +10,6 @@ import lombok.Data;
 @Data
 @Entity
 public class Habilidade implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8864383604628925315L;
 	@Id
 	private String nome;

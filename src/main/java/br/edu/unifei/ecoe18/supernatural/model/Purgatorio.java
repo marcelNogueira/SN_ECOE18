@@ -10,9 +10,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Purgatorio extends Lugar {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4829470475903357347L;
 	@OneToOne
 	private static final Purgatorio instancia = new Purgatorio();
@@ -22,4 +19,9 @@ public class Purgatorio extends Lugar {
 	private Purgatorio() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public static Purgatorio getInstancia() {
+		return instancia;
+	}
+	
 }

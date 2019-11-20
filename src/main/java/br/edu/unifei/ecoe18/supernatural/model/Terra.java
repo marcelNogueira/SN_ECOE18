@@ -13,9 +13,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Terra extends Lugar {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6922438128071652829L;
 	@OneToOne
 	private static final Terra instancia = new Terra();
@@ -25,4 +22,9 @@ public class Terra extends Lugar {
 	private Terra() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public static Terra getInstancia() {
+		return instancia;
+	}
+	
 }

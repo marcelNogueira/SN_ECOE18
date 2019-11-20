@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 public class AbstractDAO<T, K> {
 	private EntityManager entityManager =
 			FonteDados.createManager();
+	@SuppressWarnings("unchecked")
 	private Class<T> clazz = 
 			(Class<T>) ((ParameterizedType) 
 			this.getClass().
@@ -42,6 +43,7 @@ public class AbstractDAO<T, K> {
 		return (T)entityManager.find(
 				clazz, key);
 	}
+	@SuppressWarnings("unchecked")
 	public List<T> findAll(){
 		return entityManager.createQuery(
 				"from " + clazz.getName()
