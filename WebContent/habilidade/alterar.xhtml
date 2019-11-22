@@ -11,11 +11,14 @@
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form>			
-				<p>nome: <h:inputText  value="#{acessorioBean.acessorio.nome}" readonly="true" /></p>
-				<h:inputHidden value="#{acessorioBean.acessorio.nome}" />
-				<p>cor: <h:inputText value="#{acessorioBean.acessorio.cor}" /></p>
-				<p>funcao: <h:inputText value="#{acessorioBean.acessorio.funcao}" /></p>
-				<h:commandButton value="alterar" action="#{acessorioBean.alterar}" />
+				
+				<div><label>Nome</label></div>
+				<div><h:selectOneMenu value="#{habilidadeBean.habilidade.nome}">
+					<f:selectItems value="#{habilidadeBean.habilidades}" var="h" itemValue="#{h.nome}" itemLabel="#{h.nome}"/>
+				</h:selectOneMenu></div>
+				<div><label>Descrição</label></div>
+				<div><h:inputText value="#{habilidadeBean.habilidade.descricao}" size="50" /></div>
+				<div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}" /></div>
 			</h:form>
 		</f:view>
 	</ui:define>

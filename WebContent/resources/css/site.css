@@ -1,6 +1,8 @@
 body{
 	background-position: center  top;
 	background: #101010; 
+	position: relative;
+	margin-bottom: 0;
 }
 #tudo{
 	width: 1024px;
@@ -19,8 +21,6 @@ body{
 	height: 90px;
 	border-radius: 20px;
 	background: #34383b;
-	position: absolute;
-	bottom: 0;
 }
 #rodape-tudo{
 	width: 90%;
@@ -118,12 +118,11 @@ body{
 }
 
 #conteudo1 a {
-	text-decoration: none;
-	color: #000000;
-	padding: 10px;
-	text-align: center;
-	font-size: larger;
 	color: #EEEEEE;
+	padding: 12px 10px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
 }
 
 #conteudo2{
@@ -174,6 +173,43 @@ body{
 #conteudo2 .send-button input[type="submit"]:hover {
 	background-color: #009688;
 }
+
+.ui-accordion .ui-accordion-header .ui-icon{
+	margin-bottom: 0px;
+}
+
+.ui-widget-content{
+	color: #EEEEEE;
+	background: #34383b;
+	border
+
+}
+
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default{
+	color: #EEEEEE;
+	background: #101010;
+	font-weight: normal;
+	text-shadow: 0 0 0;
+}
+
+.ui-state-hover{
+	color: #00B7C9;
+	background: #101010;
+	text-shadow: 0 0 0;
+	font-weight: normal;
+}
+
+.ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active{
+	color: #FFFFFF;
+	background: #00b7c9;
+	text-shadow: 0 0 0;
+	font-weight: normal;
+}
+
+ui.accordion .ui-accordion-content {
+	border: 1px solid #101010;
+}
+
 
 #conteudo3{
 	visibility: hidden;

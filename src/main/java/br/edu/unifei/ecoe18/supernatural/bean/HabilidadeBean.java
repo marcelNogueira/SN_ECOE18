@@ -1,6 +1,7 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,7 @@ public class HabilidadeBean implements Serializable {
 	private static final long serialVersionUID = 6353283938285185792L;
 	private Habilidade habilidade = new Habilidade(); 
 	private HabilidadeDAO hdao = new HabilidadeDAO(); 
+	private List<Habilidade> habilidades = hdao.findAll();
 	public String inserir() {
 		hdao.create(habilidade);
 		return "/index";
@@ -57,10 +59,15 @@ public class HabilidadeBean implements Serializable {
 		return "/index";
 	}
 	public String excluir() {
+	System.out.println(habilidade.getNome());
 		hdao.deleteKey(habilidade.getNome());
 		return "/index";
 	}
 	public String consultar() {
 		return "/index";
+	}
+	
+	public void onHabilidadeChange() {
+		System.out.println("mudou+"+habilidade.getNome());
 	}
 }
