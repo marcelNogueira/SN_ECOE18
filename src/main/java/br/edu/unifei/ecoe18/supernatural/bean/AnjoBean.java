@@ -49,7 +49,6 @@ public class AnjoBean implements Serializable{
 	private HabilidadeDAO habilidadeDao = new HabilidadeDAO();
 	private List<Habilidade> habilidades = habilidadeDao.findAll();
 	
-	
 	private NivelEnum[] niveis = NivelEnum.values();
 	
 	public String inserir() {

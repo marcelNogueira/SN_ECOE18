@@ -1,6 +1,7 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,7 @@ public class PurgatorioBean implements Serializable {
 	private static final long serialVersionUID = 1287620073192851736L;
 	private Purgatorio purgatorio = Purgatorio.getInstancia(); 
 	private PurgatorioDAO pdao = new PurgatorioDAO(); 
+	private List<Purgatorio> purgatorios = pdao.findAll();
 	public String inserir() {
 		pdao.create(purgatorio);
 		return "/index";

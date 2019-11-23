@@ -5,15 +5,20 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition template="../template.xhtml">
-	<ui:define name="title">Inserir Habilidade</ui:define>
+	<ui:define name="title">Inserir Purgatório</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form>
+				<div><label>Número de Seres</label></div>
+				<div><h:inputText value="#{purgatorioBean.purgatorio.numSeres}" size="50"/></div>
 				<div><label>Nome</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.nome}" size="50"/></div>
-				<div><label>Descrição</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.descricao}" size="50"/></div>
-				<div class="send-button"><h:commandButton value="Inserir" action="#{habilidadeBean.inserir}"/></div>
+				<div><h:inputText value="#{purgatorioBean.purgatorio.descricao}" size="50"/></div>
+				<div><label>Coordenadas do Portal</label></div>
+				<div><label>Latitude</label></div>
+				<div><h:inputText value="#{purgatorioBean.purgatorio.latitudePortal}" size="50"/></div>
+				<div><label>Longitude</label></div>					
+				<div><h:inputText value="#{purgatorioBean.purgatorio.longitudePortal}" size="50"/></div>
+				<div class="send-button"><h:commandButton value="Inserir" action="#{purgatorioBean.inserir}"/></div>
 			</h:form>
 		</f:view>
 	</ui:define>

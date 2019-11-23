@@ -9,9 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Criatura extends Sobrenatural {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4017439951985932100L;
 	private String tipo;
 	

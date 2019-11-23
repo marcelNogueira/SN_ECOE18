@@ -8,49 +8,64 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+	<ui:define name="title">Purgatório</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{purgatorioBean.purgatorios}" var="purgatorio">
+					<p:tab title="#{purgatorio.descricao}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<h:outputText value="#{purgatorio.descricao}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<div><label>Número de Seres</label></div>
+							<h:outputText value="#{purgatorio.numSeres}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<div><label>Coordenadas do Portal</label></div>
+							<h:outputText/>
+							<div><label>Latitude</label></div>
+							<h:outputText value="#{purgatorio.latitudePortal}"/>
+							<div><label>Longitude</label></div>		
+							<h:outputText value="#{purgatorio.longitudePortal}"/>
+							
+							<p:commandLink update=":form:updatepurgatorio" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{purgatorio}" target="#{purgatorioBean.purgatorio}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:deletepurgatorio" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{purgatorio}" target="#{purgatorioBean.purgatorio}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
+	        <p:outputPanel id="updatepurgatorio" style="text-align:left;">
+	        	<div><h:inputHidden value="#{purgatorioBean.purgatorio.lugarId}"/></div>
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+						<div><h:outputText value="#{purgatorioBean.purgatorio.descricao}"/></div>
+            <div><label>Número de Seres</label></div>
+            <div><h:inputText value="#{purgatorioBean.purgatorio.numSeres}" /></div>
+            <div><label>Coordenadas do Portal</label></div>
+						<div><label>Latitude</label></div>
+						<div><h:inputText value="#{purgatorioBean.purgatorio.latitudePortal}" size="50"/></div>
+						<div><label>Longitude</label></div>					
+						<div><h:inputText value="#{purgatorioBean.purgatorio.longitudePortal}" size="50"/></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{purgatorioBean.alterar}"/></div>
             
 	        </p:outputPanel>
 		    </p:dialog>
 		    
+		    
+		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="deletepurgatorio" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{purgatorioBean.purgatorio.descricao}?"/>
+            <h:inputHidden value="#{purgatorioBean.purgatorio.lugarId}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{purgatorioBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    

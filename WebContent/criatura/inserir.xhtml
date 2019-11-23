@@ -3,17 +3,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="../template.xhtml">
-	<ui:define name="title">Inserir Habilidade</ui:define>
+	<ui:define name="title">Inserir Criatura</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form>
 				<div><label>Nome</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.nome}" size="50"/></div>
-				<div><label>Descrição</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.descricao}" size="50"/></div>
-				<div class="send-button"><h:commandButton value="Inserir" action="#{habilidadeBean.inserir}"/></div>
+				<div><h:inputText value="#{criaturaBean.criatura.nome}" size="50"/></div>
+				<div><label>Status</label></div>
+				<div>
+					<p:selectOneMenu class="select-dropdown" value="#{criaturaBean.criatura.status}">
+						<f:selectItems value="#{criaturaBean.statusSer}"/>
+					</p:selectOneMenu>
+				</div>
+				<div><label>Evento</label></div>
+				<div>
+					<p:selectOneMenu class="select-dropdown" value="#{criaturaBean.criatura.evento}" label="Evento">
+						<f:selectItems value="#{criaturaBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
+					</p:selectOneMenu>
+				</div>
+				<div><label>Lugar</label></div>
+				<div>
+					<p:selectOneMenu class="select-dropdown" value="#{criaturaBean.lugarId}">
+						<f:selectItems value="#{criaturaBean.lugares}" var="l" itemValue="#{l.lugarId}" itemLabel="#{l.descricao}"/>
+					</p:selectOneMenu>
+				</div>
+				<div><label>Rituais</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{criaturaBean.criatura.rituais}" label="Rituais" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{criaturaBean.rituais}" var="r" itemValue="#{r}" itemLabel="#{r.objetivo}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Armas</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{criaturaBean.criatura.armas}" label="Armas" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{criaturaBean.armas}" var="a" itemValue="#{a}" itemLabel="#{a.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Fraqueza</label></div>
+				<div><h:inputText value="#{criaturaBean.criatura.fraqueza}" size="50"/></div>
+				<div><label>Habilidades</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{criaturaBean.criatura.habilidades}" label="Habilidades" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{criaturaBean.habilidades}" var="h" itemValue="#{h}" itemLabel="#{h.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Tipo</label></div>
+				<div><h:inputText value="#{criaturaBean.criatura.tipo}" size="50"/></div>
+				
+				<div class="send-button"><h:commandButton value="Inserir" action="#{criaturaBean.inserir}"/></div>
 			</h:form>
 		</f:view>
 	</ui:define>

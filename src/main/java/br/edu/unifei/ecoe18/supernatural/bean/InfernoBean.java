@@ -1,6 +1,7 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,7 @@ public class InfernoBean implements Serializable {
 	private static final long serialVersionUID = -6482656155979404530L;
 	private Inferno inferno = Inferno.getInstancia(); 
 	private InfernoDAO idao = new InfernoDAO(); 
+	private List<Inferno> infernos = idao.findAll();
 	public String inserir() {
 		idao.create(inferno);
 		return "/index";
