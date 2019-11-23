@@ -181,7 +181,7 @@ body{
 .ui-widget-content{
 	color: #EEEEEE;
 	background: #34383b;
-	border
+	
 
 }
 
@@ -190,6 +190,14 @@ body{
 	background: #101010;
 	font-weight: normal;
 	text-shadow: 0 0 0;
+}
+
+.ui-state-default .ui-selectcheckboxmenu-multiple-container{
+	background: #FFFFFF;	
+}
+
+.select-dropdown .ui-state-default{
+	background: #FFFFFF;
 }
 
 .ui-state-hover{
@@ -209,6 +217,21 @@ body{
 ui.accordion .ui-accordion-content {
 	border: 1px solid #101010;
 }
+#conteudo2 .select-dropdown{
+	width: 50%;
+	margin: 10px 0 16px;
+	outline: none;
+	color: #000;
+	font-weight: 500;
+	background: #FFFFFF;
+}
+
+#conteudo2 .select-dropdown label{
+	color: #000;
+	font-weight: 500;
+	font-family: 'Roboto', sans-serif;
+}
+
 
 
 #conteudo3{

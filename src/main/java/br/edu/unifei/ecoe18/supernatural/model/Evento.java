@@ -15,4 +15,5 @@ public abstract class Evento implements Serializable{
 	@Id
 	@GeneratedValue
 	private int enventoId;
+	private String fato;
 }

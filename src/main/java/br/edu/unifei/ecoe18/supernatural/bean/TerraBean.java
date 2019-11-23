@@ -1,6 +1,7 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,7 @@ public class TerraBean implements Serializable {
 	private static final long serialVersionUID = -6684786246390914778L;
 	private Terra terra = Terra.getInstancia(); 
 	private TerraDAO tdao = new TerraDAO(); 
+	private List<Terra> terras = tdao.findAll();
 	public String inserir() {
 		tdao.create(terra);
 		return "/index";

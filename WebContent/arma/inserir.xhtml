@@ -5,15 +5,18 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition template="../template.xhtml">
-	<ui:define name="title">Inserir Habilidade</ui:define>
+	<ui:define name="title">Inserir Arma</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form>
 				<div><label>Nome</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.nome}" size="50"/></div>
+				<div><h:inputText value="#{armaBean.arma.nome}" size="50"/></div>
 				<div><label>Descrição</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.descricao}" size="50"/></div>
-				<div class="send-button"><h:commandButton value="Inserir" action="#{habilidadeBean.inserir}"/></div>
+				<div><h:inputText value="#{armaBean.arma.descricao}" size="50"/></div>
+				<div><h:selectBooleanCheckbox value="#{armaBean.arma.mitico}"/><label>Mítico</label></div>
+				
+				<div class="send-button"><h:commandButton value="Inserir" action="#{armaBean.inserir}"/></div>
+				
 			</h:form>
 		</f:view>
 	</ui:define>

@@ -14,9 +14,6 @@ import lombok.Data;
 @Data
 @Entity
 public class Feitico implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6986434977024079437L;
 	@Id
 	@GeneratedValue

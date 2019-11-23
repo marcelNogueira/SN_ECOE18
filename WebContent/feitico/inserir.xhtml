@@ -3,17 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="../template.xhtml">
-	<ui:define name="title">Inserir Habilidade</ui:define>
+	<ui:define name="title">Inserir Feitiço</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form>
-				<div><label>Nome</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.nome}" size="50"/></div>
 				<div><label>Descrição</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.descricao}" size="50"/></div>
-				<div class="send-button"><h:commandButton value="Inserir" action="#{habilidadeBean.inserir}"/></div>
+				<div><h:inputText value="#{feiticoBean.feitico.descricao}" size="50"/></div>
+				<div><label>Poder</label></div>
+				<div><h:inputText value="#{feiticoBean.feitico.poder}" size="50"/></div>
+				<div><label>Ingredientes</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{feiticoBean.feitico.ingredientes}" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{feiticoBean.ingredientes}" var="i" itemValue="#{i}" itemLabel="#{i.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div class="send-button"><h:commandButton value="Inserir" action="#{feiticoBean.inserir}"/></div>
 			</h:form>
 		</f:view>
 	</ui:define>

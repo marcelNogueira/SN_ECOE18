@@ -1,13 +1,15 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
-
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import br.edu.unifei.ecoe18.supernatural.dao.IngredienteDAO;
 import br.edu.unifei.ecoe18.supernatural.dao.RitualDAO;
+import br.edu.unifei.ecoe18.supernatural.model.Ingrediente;
 import br.edu.unifei.ecoe18.supernatural.model.Ritual;
 import lombok.Data;
 
@@ -17,7 +19,12 @@ import lombok.Data;
 public class RitualBean implements Serializable {
 	private static final long serialVersionUID = 4681611749339259934L;
 	private Ritual ritual = new Ritual(); 
-	private RitualDAO rdao = new RitualDAO(); 
+	private RitualDAO rdao = new RitualDAO();
+	private List<Ritual> rituais = rdao.findAll();
+	
+	private IngredienteDAO ingredienteDao = new IngredienteDAO();
+	private List<Ingrediente> ingredientes = ingredienteDao.findAll();
+	
 	public String inserir() {
 		rdao.create(ritual);
 		return "/index";

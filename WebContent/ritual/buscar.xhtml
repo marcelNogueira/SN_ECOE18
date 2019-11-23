@@ -8,49 +8,67 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+	<ui:define name="title">Ritual</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{ritualBean.rituais}" var="ritual">
+					<p:tab title="#{ritual.objetivo}">
 						<h:panelGrid columns="2" cellpadding="5">
-							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<div><label>Objetivo</label></div>
+							<h:outputText value="#{ritual.objetivo}"/>
 							
 							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<h:outputText value="#{ritual.descricao}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<p:outputPanel rendered="#{not empty ritual.ingredientes}">
+								<div><label>Ingredientes</label></div>
+								<h:form>
+									<p:dataList value="#{ritual.ingredientes}" var="ingrediente">
+							        #{ingrediente.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty ritual.ingredientes}"></p:outputPanel>
+							
+							<p:commandLink update=":form:updateritual" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{ritual}" target="#{ritualBean.ritual}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:deleteritual" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{ritual}" target="#{ritualBean.ritual}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
-            <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
+	        <p:outputPanel id="updateritual" style="text-align:left;">
+            <div><label>Objetivo</label></div>
+						<div><h:inputText value="#{ritualBean.ritual.objetivo}"/></div>
+						<div><h:inputHidden value="#{ritualBean.ritual.ritualId}"/></div>
             <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+            <div><h:inputText value="#{ritualBean.ritual.descricao}" /></div>
+						<div><label>Ingredientes</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{ritualBean.ritual.ingredientes}" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{ritualBean.ingredientes}" var="i" itemValue="#{i}" itemLabel="#{i.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{ritualBean.alterar}"/></div>
             
 	        </p:outputPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="deleteritual" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{ritualBean.ritual.objetivo}?"/>
+            <h:inputHidden value="#{ritualBean.ritual.ritualId}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{ritualBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    

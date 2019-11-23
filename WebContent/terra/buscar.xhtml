@@ -8,49 +8,61 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+	<ui:define name="title">Terra</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{terraBean.terras}" var="terra">
+					<p:tab title="#{terra.descricao}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<h:outputText value="#{terra.descricao}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<div><label>Número de Seres</label></div>
+							<h:outputText value="#{terra.numSeres}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<div><label>Data</label></div>
+							<h:outputText value="#{terra.tempo}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+							</h:outputText>
+							
+							<p:commandLink update=":form:updateterra" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{terra}" target="#{terraBean.terra}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:deleteterra" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{terra}" target="#{terraBean.terra}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
+	        <p:outputPanel id="updateterra" style="text-align:left;">
+	        	<div><h:inputHidden value="#{terraBean.terra.lugarId}"/></div>
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+						<div><h:inputText value="#{terraBean.terra.descricao}"/></div>
+            <div><label>Número de Seres</label></div>
+            <div><h:inputText value="#{terraBean.terra.numSeres}" /></div>
+            <div><label>Data</label></div>
+						<div>
+							<h:inputText value="#{terraBean.terra.tempo}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+							</h:inputText>
+						</div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{terraBean.alterar}"/></div>
             
 	        </p:outputPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="deleteterra" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{terraBean.terra.descricao}?"/>
+            <h:inputHidden value="#{terraBean.terra.lugarId}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{terraBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    

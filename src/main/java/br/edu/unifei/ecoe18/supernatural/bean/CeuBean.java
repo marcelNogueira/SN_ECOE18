@@ -1,6 +1,7 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,7 @@ public class CeuBean implements Serializable {
 	private static final long serialVersionUID = -3234310108455622766L;
 	private Ceu ceu = Ceu.getInstancia(); 
 	private CeuDAO cdao = new CeuDAO(); 
+	private List<Ceu> ceus = cdao.findAll();
 	public String inserir() {
 		cdao.create(ceu);
 		return "/index";

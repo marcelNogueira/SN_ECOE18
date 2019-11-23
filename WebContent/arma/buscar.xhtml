@@ -8,49 +8,59 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+<ui:define name="title">Arma</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{armaBean.armas}" var="arma">
+					<p:tab title="#{arma.nome}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<h:outputText value="#{arma.nome}"/>
 							
 							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<h:outputText value="#{arma.descricao}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<p:outputPanel rendered="#{arma.mitico==true}">
+								<div><label>É mítica</label></div>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{arma.mitico==true}">
+								
+							</p:outputPanel>
+							
+							<p:commandLink update=":form:update" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{arma}" target="#{armaBean.arma}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{arma}" target="#{armaBean.arma}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
+	        <p:outputPanel id="update" style="text-align:left;">
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
+						<div><h:inputText value="#{armaBean.arma.nome}" readonly="true"/></div>
+						<div><h:inputHidden value="#{armaBean.arma.nome}"/></div>
             <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+            <div><h:inputText value="#{armaBean.arma.descricao}" /></div>
+						<div><h:selectBooleanCheckbox value="#{armaBean.arma.mitico}"/><label>Mítico</label></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{armaBean.alterar}"/></div>
             
 	        </p:outputPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="delete" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{armaBean.arma.nome}?"/>
+            <h:inputHidden value="#{armaBean.arma.nome}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{armaBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    

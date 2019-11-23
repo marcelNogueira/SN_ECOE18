@@ -48,7 +48,7 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
+	        	<h:outputText value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
             <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
 	        </p:outputPanel>

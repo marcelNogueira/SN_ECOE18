@@ -1,6 +1,7 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -16,8 +17,10 @@ import lombok.Data;
 @RequestScoped
 public class ArmaBean implements Serializable {
 	private static final long serialVersionUID = 8957482682194094741L;
-	private Arma arma = new Arma(); 
 	private ArmaDAO adao = new ArmaDAO(); 
+	private Arma arma = new Arma(); 
+	private List<Arma> armas = adao.findAll();
+	
 	public String inserir() {
 		adao.create(arma);
 		return "/index";
