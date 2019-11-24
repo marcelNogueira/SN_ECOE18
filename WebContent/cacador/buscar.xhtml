@@ -8,49 +8,128 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+<ui:define name="title">Pessoa</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{cacadorBean.cacadors}" var="cacador">
+					<p:tab title="#{cacador.nome}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<h:outputText value="#{cacador.nome}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<div><label>Status</label></div>
+							<h:outputText value="#{cacador.status}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<div><label>Lugar</label></div>
+							<h:outputText value="#{cacador.lugar.descricao}"/>
+							
+							<div><label>Data</label></div>
+							<h:outputText value="#{cacador.dataNascimento}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+							</h:outputText>
+							
+							<div><label>Índice de Bondade</label></div>
+							<h:outputText value="#{cacador.bondade}"/>
+							
+							<div><label>Número de Caçadas</label></div>
+							<h:outputText value="#{cacador.numCacadas}"/>
+							
+							<p:outputPanel rendered="#{cacador.ativo==true}">
+								<div><label>Ativo</label></div>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{cacador.ativo==false}">
+								<div><label>Aposentado</label></div>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty cacador.rituais}">
+								<div><label>Rituais</label></div>
+								<h:form>
+									<p:dataList value="#{cacador.rituais}" var="ritual">
+							        #{ritual.objetivo}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty cacador.armas}">
+								<div><label>Armas</label></div>
+								<h:form>
+									<p:dataList value="#{cacador.armas}" var="arma">
+							        #{arma.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:commandLink update=":form:update" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{cacador}" target="#{cacadorBean.cacador}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{cacador}" target="#{cacadorBean.cacador}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
+	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+						<div><h:inputText value="#{cacadorBean.cacador.nome}" size="50"/></div>
+						<div><label>Status</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{cacadorBean.cacador.status}">
+								<f:selectItems value="#{cacadorBean.statusSer}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Evento</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{cacadorBean.cacador.evento}" label="Evento">
+								<f:selectItems value="#{cacadorBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Lugar</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{cacadorBean.lugarId}">
+								<f:selectItems value="#{cacadorBean.lugares}" var="l" itemValue="#{l.lugarId}" itemLabel="#{l.descricao}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Rituais</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{cacadorBean.cacador.rituais}" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{cacadorBean.rituais}" var="r" itemValue="#{r}" itemLabel="#{r.objetivo}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Armas</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{cacadorBean.cacador.armas}" label="Armas" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{cacadorBean.armas}" var="a" itemValue="#{a}" itemLabel="#{a.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Indice de Bondade</label></div>
+						<div><h:inputText value="#{cacadorBean.cacador.bondade}" size="50"/></div>
+						<div><label>Data de Nascimento</label></div>
+						<div>
+							<h:inputText value="#{cacadorBean.cacador.dataNascimento}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+							</h:inputText>
+						</div>
+						<div><label>Número de Caçadas</label></div>
+						<div><h:inputText value="#{cacadorBean.cacador.numCacadas}" size="50"/></div>
+						<div><p:selectBooleanCheckbox value="#{cacadorBean.cacador.ativo}" label="Ativo"/><div><label>Ativo</label></div></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{cacadorBean.alterar}"/></div>
             
-	        </p:outputPanel>
+	        </p:scrollPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="delete" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{cacadorBean.cacador.nome}?"/>
+            <h:inputHidden value="#{cacadorBean.cacador.nome}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{cacadorBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    
@@ -59,13 +138,3 @@
 	</ui:define>
 </ui:composition>
 </html>
-
-
-
-
-
-
-
-
-
-

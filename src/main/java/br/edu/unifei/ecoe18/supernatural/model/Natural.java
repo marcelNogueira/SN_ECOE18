@@ -13,9 +13,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Natural extends Ser {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4636682736873912867L;
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;

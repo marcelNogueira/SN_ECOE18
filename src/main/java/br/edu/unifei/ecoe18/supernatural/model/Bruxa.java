@@ -13,9 +13,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Bruxa extends Sobrenatural {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1348739053439771516L;
 	private int numFeiticos;
 	@ManyToMany

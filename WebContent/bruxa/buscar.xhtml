@@ -8,49 +8,138 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+<ui:define name="title">Bruxa</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{bruxaBean.bruxas}" var="bruxa">
+					<p:tab title="#{bruxa.nome}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<h:outputText value="#{bruxa.nome}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<div><label>Status</label></div>
+							<h:outputText value="#{bruxa.status}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<div><label>Lugar</label></div>
+							<h:outputText value="#{bruxa.lugar.descricao}"/>
+							
+							<div><label>Fraqueza</label></div>
+							<h:outputText value="#{bruxa.fraqueza}"/>
+							
+							<div><label>Número de Feitiços</label></div>
+							<h:outputText value="#{bruxa.numFeiticos}"/>
+							
+							<p:outputPanel rendered="#{not empty bruxa.rituais}">
+								<div><label>Rituais</label></div>
+								<h:form>
+									<p:dataList value="#{bruxa.rituais}" var="ritual">
+							        #{ritual.objetivo}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty bruxa.armas}">
+								<div><label>Armas</label></div>
+								<h:form>
+									<p:dataList value="#{bruxa.armas}" var="arma">
+							        #{arma.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty bruxa.habilidades}">
+								<div><label>Habilidades</label></div>
+								<h:form>
+									<p:dataList value="#{bruxa.habilidades}" var="habilidade">
+							        #{habilidade.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty bruxa.feiticos}">
+								<div><label>Feitiços</label></div>
+								<h:form>
+									<p:dataList value="#{bruxa.feiticos}" var="feitico">
+							        #{feitico.descricao}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:commandLink update=":form:update" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{bruxa}" target="#{bruxaBean.bruxa}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{bruxa}" target="#{bruxaBean.bruxa}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
+	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+						<div><h:inputText value="#{bruxaBean.bruxa.nome}" size="50"/></div>
+						<div><label>Status</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{bruxaBean.bruxa.status}">
+								<f:selectItems value="#{bruxaBean.statusSer}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Evento</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{bruxaBean.bruxa.evento}" label="Evento">
+								<f:selectItems value="#{bruxaBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Lugar</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{bruxaBean.lugarId}">
+								<f:selectItems value="#{bruxaBean.lugares}" var="l" itemValue="#{l.lugarId}" itemLabel="#{l.descricao}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Rituais</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{bruxaBean.bruxa.rituais}" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{bruxaBean.rituais}" var="r" itemValue="#{r}" itemLabel="#{r.objetivo}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Armas</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{bruxaBean.bruxa.armas}" label="Armas" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{bruxaBean.armas}" var="a" itemValue="#{a}" itemLabel="#{a.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Fraqueza</label></div>
+						<div><h:inputText value="#{bruxaBean.bruxa.fraqueza}" size="50"/></div>
+						<div><label>Habilidades</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{bruxaBean.bruxa.habilidades}" label="Habilidades" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{bruxaBean.habilidades}" var="h" itemValue="#{h}" itemLabel="#{h.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Feitiços</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{bruxaBean.bruxa.feiticos}" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{bruxaBean.feiticos}" var="f" itemValue="#{f}" itemLabel="#{f.descricao}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Número de Feitiços</label></div>
+				<div><h:inputText value="#{bruxaBean.bruxa.numFeiticos}" size="50"/></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{bruxaBean.alterar}"/></div>
             
-	        </p:outputPanel>
+	        </p:scrollPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="delete" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{bruxaBean.bruxa.nome}?"/>
+            <h:inputHidden value="#{bruxaBean.bruxa.nome}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{bruxaBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    

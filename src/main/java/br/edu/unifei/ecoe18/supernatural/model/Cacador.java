@@ -9,9 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Cacador extends Natural {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4677451487175183325L;
 	private Boolean ativo;
 	private int numCacadas;

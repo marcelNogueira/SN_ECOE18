@@ -3,17 +3,68 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="../template.xhtml">
-	<ui:define name="title">Inserir Habilidade</ui:define>
+	<ui:define name="title">Inserir encruzilhada</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form>
 				<div><label>Nome</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.nome}" size="50"/></div>
-				<div><label>Descrição</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.descricao}" size="50"/></div>
-				<div class="send-button"><h:commandButton value="Inserir" action="#{habilidadeBean.inserir}"/></div>
+				<div><h:inputText value="#{encruzilhadaBean.encruzilhada.nome}" size="50"/></div>
+				<div><label>Status</label></div>
+				<div>
+					<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.status}">
+						<f:selectItems value="#{encruzilhadaBean.statusSer}"/>
+					</p:selectOneMenu>
+				</div>
+				<div><label>Evento</label></div>
+				<div>
+					<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.evento}" label="Evento">
+						<f:selectItems value="#{encruzilhadaBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
+					</p:selectOneMenu>
+				</div>
+				<div><label>Lugar</label></div>
+				<div>
+					<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.lugarId}">
+						<f:selectItems value="#{encruzilhadaBean.lugares}" var="l" itemValue="#{l.lugarId}" itemLabel="#{l.descricao}"/>
+					</p:selectOneMenu>
+				</div>
+				<div><label>Rituais</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.rituais}" label="Rituais" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{encruzilhadaBean.rituais}" var="r" itemValue="#{r}" itemLabel="#{r.objetivo}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Armas</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.armas}" label="Armas" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{encruzilhadaBean.armas}" var="a" itemValue="#{a}" itemLabel="#{a.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Fraqueza</label></div>
+				<div><h:inputText value="#{encruzilhadaBean.encruzilhada.fraqueza}" size="50"/></div>
+				<div><label>Habilidades</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.habilidades}" label="Habilidades" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{encruzilhadaBean.habilidades}" var="h" itemValue="#{h}" itemLabel="#{h.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Nível</label></div>
+				<div>
+					<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.nivel}">
+						<f:selectItems value="#{encruzilhadaBean.niveis}" />
+					</p:selectOneMenu>
+				</div>
+				<div><label>Alma Humana</label></div>
+				<div><h:inputText value="#{encruzilhadaBean.encruzilhada.almaHumana}" size="50"/></div>
+				<div><label>Cor dos Olhos</label></div>
+				<div><h:inputText value="#{encruzilhadaBean.encruzilhada.corOlhos}" size="50"/></div>
+				
+				<div><label>Número de Pactos</label></div>
+				<div><h:inputText value="#{encruzilhadaBean.encruzilhada.numPactos}" size="50"/></div>
+				
+				<div class="send-button"><h:commandButton value="Inserir" action="#{encruzilhadaBean.inserir}"/></div>
 			</h:form>
 		</f:view>
 	</ui:define>

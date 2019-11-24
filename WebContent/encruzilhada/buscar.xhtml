@@ -8,49 +8,142 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+<ui:define name="title">Encruzilhada</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{encruzilhadaBean.encruzilhadas}" var="encruzilhada">
+					<p:tab title="#{encruzilhada.nome}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<h:outputText value="#{encruzilhada.nome}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<div><label>Status</label></div>
+							<h:outputText value="#{encruzilhada.status}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<div><label>Lugar</label></div>
+							<h:outputText value="#{encruzilhada.lugar.descricao}"/>
+							
+							<div><label>Fraqueza</label></div>
+							<h:outputText value="#{encruzilhada.fraqueza}"/>
+							
+							<div><label>Alma Humana</label></div>
+							<h:outputText value="#{encruzilhada.almaHumana}"/>
+							
+							<div><label>Cor dos Olhos</label></div>
+							<h:outputText value="#{encruzilhada.corOlhos}"/>
+							
+							<div><label>Número de Pactos</label></div>
+							<h:outputText value="#{encruzilhada.numPactos}"/>
+							
+							<div><label>Nível</label></div>
+							<h:outputText value="#{encruzilhada.nivel}"/>
+							
+							<p:outputPanel rendered="#{not empty encruzilhada.rituais}">
+								<div><label>Rituais</label></div>
+								<h:form>
+									<p:dataList value="#{encruzilhada.rituais}" var="ritual">
+							        #{ritual.objetivo}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty encruzilhada.armas}">
+								<div><label>Armas</label></div>
+								<h:form>
+									<p:dataList value="#{encruzilhada.armas}" var="arma">
+							        #{arma.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty encruzilhada.habilidades}">
+								<div><label>Habilidades</label></div>
+								<h:form>
+									<p:dataList value="#{encruzilhada.habilidades}" var="habilidade">
+							        #{habilidade.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:commandLink update=":form:update" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{encruzilhada}" target="#{encruzilhadaBean.encruzilhada}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{encruzilhada}" target="#{encruzilhadaBean.encruzilhada}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
+	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+						<div><h:inputText value="#{encruzilhadaBean.encruzilhada.nome}" size="50"/></div>
+						<div><label>Status</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.status}">
+								<f:selectItems value="#{encruzilhadaBean.statusSer}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Evento</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.evento}" label="Evento">
+								<f:selectItems value="#{encruzilhadaBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Lugar</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.lugarId}">
+								<f:selectItems value="#{encruzilhadaBean.lugares}" var="l" itemValue="#{l.lugarId}" itemLabel="#{l.descricao}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Rituais</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.rituais}" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{encruzilhadaBean.rituais}" var="r" itemValue="#{r}" itemLabel="#{r.objetivo}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Armas</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.armas}" label="Armas" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{encruzilhadaBean.armas}" var="a" itemValue="#{a}" itemLabel="#{a.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Fraqueza</label></div>
+						<div><h:inputText value="#{encruzilhadaBean.encruzilhada.fraqueza}" size="50"/></div>
+						<div><label>Habilidades</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.habilidades}" label="Habilidades" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{encruzilhadaBean.habilidades}" var="h" itemValue="#{h}" itemLabel="#{h.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Nível</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{encruzilhadaBean.encruzilhada.nivel}">
+								<f:selectItems value="#{encruzilhadaBean.niveis}" />
+							</p:selectOneMenu>
+						</div>
+						<div><label>Alma Humana</label></div>
+						<div><h:inputText value="#{encruzilhadaBean.encruzilhada.almaHumana}" size="50"/></div>
+						<div><label>Cor dos Olhos</label></div>
+						<div><h:inputText value="#{encruzilhadaBean.encruzilhada.corOlhos}" size="50"/></div>
+						<div><label>Número de Pactos</label></div>
+						<div><h:inputText value="#{encruzilhadaBean.encruzilhada.numPactos}" size="50"/></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{encruzilhadaBean.alterar}"/></div>
             
-	        </p:outputPanel>
+	        </p:scrollPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="delete" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{encruzilhadaBean.encruzilhada.nome}?"/>
+            <h:inputHidden value="#{encruzilhadaBean.encruzilhada.nome}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{encruzilhadaBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    
