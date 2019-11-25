@@ -1,6 +1,7 @@
 package br.edu.unifei.ecoe18.supernatural.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,8 @@ public class IngredienteBean implements Serializable {
 	private static final long serialVersionUID = -2673397149166165815L;
 	private Ingrediente ingrediente = new Ingrediente(); 
 	private IngredienteDAO idao = new IngredienteDAO(); 
+	private List<Ingrediente> ingredientes = idao.findAll();
+	private String ingredienteKey;
 	public String inserir() {
 		idao.create(ingrediente);
 		return "/index";
@@ -57,7 +60,7 @@ public class IngredienteBean implements Serializable {
 		return "/index";
 	}
 	public String excluir() {
-		idao.deleteKey(ingrediente.getNome());
+		idao.deleteKey(ingredienteKey);
 		return "/index";
 	}
 	public String consultar() {

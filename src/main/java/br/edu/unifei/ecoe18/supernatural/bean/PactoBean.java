@@ -24,6 +24,7 @@ public class PactoBean implements Serializable {
 	private Pacto pacto = new Pacto(); 
 	private PactoDAO pdao = new PactoDAO(); 
 	private List<Pacto> pactos = pdao.findAll();
+	private int pactoKey;
 	
 	private NaturalDAO naturalDao = new NaturalDAO();
 	private List<Natural> naturais = naturalDao.findAll();
@@ -80,11 +81,24 @@ public class PactoBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		pdao.update(pacto);
+		if(encruzilhadaNome!=null) {
+			pacto.setDemonio(edao.find(encruzilhadaNome));		
+		}
+		if(naturalNome!=null) {
+			pacto.setPessoa(naturalDao.find(naturalNome));		
+		}
+		try {
+			pdao.update(pacto);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		pdao.deleteKey(pacto.getEnventoId());
+		pdao.deleteKey(pactoKey);
 		return "/index";
 	}
 	public String consultar() {

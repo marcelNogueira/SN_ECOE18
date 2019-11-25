@@ -66,7 +66,7 @@
               </p:commandLink>
               <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{fantasma}" target="#{fantasmaBean.fantasma}" />
+	              <f:setPropertyActionListener value="#{fantasma.nome}" target="#{fantasmaBean.fantasmaKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -76,16 +76,11 @@
 	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
             <div><label>Nome</label></div>
 						<div><h:inputText value="#{fantasmaBean.fantasma.nome}" size="50" readonly="true"/></div>
+						<div><h:inputHidden value="#{fantasmaBean.fantasma.nome}" /></div>
 						<div><label>Status</label></div>
 						<div>
 							<p:selectOneMenu class="select-dropdown" value="#{fantasmaBean.fantasma.status}">
 								<f:selectItems value="#{fantasmaBean.statusSer}"/>
-							</p:selectOneMenu>
-						</div>
-						<div><label>Evento</label></div>
-						<div>
-							<p:selectOneMenu class="select-dropdown" value="#{fantasmaBean.fantasma.evento}" label="Evento">
-								<f:selectItems value="#{fantasmaBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
 							</p:selectOneMenu>
 						</div>
 						<div><label>Lugar</label></div>
@@ -126,8 +121,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="delete" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{fantasmaBean.fantasma.nome}?"/>
-            <h:inputHidden value="#{fantasmaBean.fantasma.nome}"/>
+	        	<h:outputText value="Deseja excluir #{fantasmaBean.fantasmaKey}?"/>
+            <h:inputHidden value="#{fantasmaBean.fantasmaKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{fantasmaBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

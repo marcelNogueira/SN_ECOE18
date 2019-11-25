@@ -12,7 +12,7 @@
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
-				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
+				<!-- <div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div> -->
 				<p:accordionPanel value="#{ceuBean.ceus}" var="ceu">
 					<p:tab title="#{ceu.descricao}">
 						<h:panelGrid columns="2" cellpadding="5">
@@ -29,10 +29,7 @@
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
 	              <f:setPropertyActionListener value="#{ceu}" target="#{ceuBean.ceu}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteceu" oncomplete="PF('deleteDialog').show()" title="Excluir">
-	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{ceu}" target="#{ceuBean.ceu}" />
-              </p:commandLink>
+              
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
@@ -52,13 +49,6 @@
 	        </p:outputPanel>
 		    </p:dialog>
 		    
-		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteceu" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{ceuBean.ceu.descricao}?"/>
-            <h:inputHidden value="#{ceuBean.ceu.lugarId}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{ceuBean.excluir}"/></div>
-	        </p:outputPanel>
-		    </p:dialog>
 		    
 			</h:form>
 		</f:view>

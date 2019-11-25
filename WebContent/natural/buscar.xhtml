@@ -57,7 +57,7 @@
               </p:commandLink>
               <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{natural}" target="#{naturalBean.natural}" />
+	              <f:setPropertyActionListener value="#{natural.nome}" target="#{naturalBean.naturalKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -66,17 +66,12 @@
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
             <div><label>Nome</label></div>
-						<div><h:inputText value="#{naturalBean.natural.nome}" size="50"/></div>
+						<div><h:inputText value="#{naturalBean.natural.nome}" size="50" readonly="true"/></div>
+						<div><h:inputHidden value="#{naturalBean.natural.nome}" /></div>
 						<div><label>Status</label></div>
 						<div>
 							<p:selectOneMenu class="select-dropdown" value="#{naturalBean.natural.status}">
 								<f:selectItems value="#{naturalBean.statusSer}"/>
-							</p:selectOneMenu>
-						</div>
-						<div><label>Evento</label></div>
-						<div>
-							<p:selectOneMenu class="select-dropdown" value="#{naturalBean.natural.evento}" label="Evento">
-								<f:selectItems value="#{naturalBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
 							</p:selectOneMenu>
 						</div>
 						<div><label>Lugar</label></div>
@@ -113,8 +108,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="delete" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{naturalBean.natural.nome}?"/>
-            <h:inputHidden value="#{naturalBean.natural.nome}"/>
+	        	<h:outputText value="Deseja excluir #{naturalBean.naturalKey}?"/>
+            <h:inputHidden value="#{naturalBean.naturalKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{naturalBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

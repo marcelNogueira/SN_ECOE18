@@ -10,13 +10,11 @@ import javax.inject.Named;
 
 import br.edu.unifei.ecoe18.supernatural.dao.AnjoDAO;
 import br.edu.unifei.ecoe18.supernatural.dao.ArmaDAO;
-import br.edu.unifei.ecoe18.supernatural.dao.EventoDAO;
 import br.edu.unifei.ecoe18.supernatural.dao.HabilidadeDAO;
 import br.edu.unifei.ecoe18.supernatural.dao.LugarDAO;
 import br.edu.unifei.ecoe18.supernatural.dao.RitualDAO;
 import br.edu.unifei.ecoe18.supernatural.model.Anjo;
 import br.edu.unifei.ecoe18.supernatural.model.Arma;
-import br.edu.unifei.ecoe18.supernatural.model.Evento;
 import br.edu.unifei.ecoe18.supernatural.model.Habilidade;
 import br.edu.unifei.ecoe18.supernatural.model.Lugar;
 import br.edu.unifei.ecoe18.supernatural.model.NivelEnum;
@@ -32,11 +30,10 @@ public class AnjoBean implements Serializable{
 	private Anjo anjo = new Anjo(); 
 	private AnjoDAO adao = new AnjoDAO(); 
 	private List<Anjo> anjos = adao.findAll();
+	private String anjoKey;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
-	private EventoDAO eventoDao = new EventoDAO();
-	private List<Evento> eventos = eventoDao.findAll();
 	private LugarDAO lugarDao = new LugarDAO();
 	private Integer lugarId;
 	private List<Lugar> lugares = lugarDao.findAll();
@@ -96,11 +93,21 @@ public class AnjoBean implements Serializable{
 		}
 	}
 	public String alterar() {
-		adao.update(anjo);
+		if(lugarId!=null) {
+			anjo.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			adao.update(anjo);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		adao.deleteKey(anjo.getNome());
+		adao.deleteKey(anjoKey);
 		return "/index";
 	}
 	public String consultar() {

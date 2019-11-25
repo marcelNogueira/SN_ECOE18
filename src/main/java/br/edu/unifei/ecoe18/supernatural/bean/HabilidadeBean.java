@@ -20,6 +20,7 @@ public class HabilidadeBean implements Serializable {
 	private Habilidade habilidade = new Habilidade(); 
 	private HabilidadeDAO hdao = new HabilidadeDAO(); 
 	private List<Habilidade> habilidades = hdao.findAll();
+	private String habilidadeKey;
 	public String inserir() {
 		hdao.create(habilidade);
 		return "/index";
@@ -59,8 +60,7 @@ public class HabilidadeBean implements Serializable {
 		return "/index";
 	}
 	public String excluir() {
-	System.out.println(habilidade.getNome());
-		hdao.deleteKey(habilidade.getNome());
+		hdao.deleteKey(habilidadeKey);
 		return "/index";
 	}
 	public String consultar() {

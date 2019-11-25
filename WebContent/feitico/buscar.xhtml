@@ -39,7 +39,7 @@
               </p:commandLink>
               <p:commandLink update=":form:deletefeitico" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{feitico}" target="#{feiticoBean.feitico}" />
+	              <f:setPropertyActionListener value="#{feitico.feiticoId}" target="#{feiticoBean.feiticoKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -66,8 +66,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="deletefeitico" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{feiticoBean.feitico.descricao}?"/>
-            <h:inputHidden value="#{feiticoBean.feitico.feiticoId}"/>
+	        	<h:outputText value="Deseja excluir #{feiticoBean.feiticoKey}?"/>
+            <h:inputHidden value="#{feiticoBean.feiticoKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{feiticoBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

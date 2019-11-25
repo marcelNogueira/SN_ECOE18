@@ -8,49 +8,50 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+	<ui:define name="title">Ingrediente</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{ingredienteBean.ingredientes}" var="ingrediente">
+					<p:tab title="#{ingrediente.nome}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<h:outputText value="#{ingrediente.nome}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<div><label>Quantidade</label></div>
+							<h:outputText value="#{ingrediente.quatidade}"/>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<p:commandLink update=":form:updateingrediente" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{ingrediente}" target="#{ingredienteBean.ingrediente}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:deleteingrediente" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{ingrediente.nome}" target="#{ingredienteBean.ingredienteKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
+	        <p:outputPanel id="updateingrediente" style="text-align:left;">
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+						<div><h:inputText value="#{ingredienteBean.ingrediente.nome}" readonly="true"/></div>
+						<div><h:inputHidden value="#{ingredienteBean.ingrediente.nome}"/></div>
+            <div><label>Quantidade</label></div>
+            <div><h:inputText value="#{ingredienteBean.ingrediente.quatidade}" /></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+            <div class="send-button"><h:commandButton value="Alterar" action="#{ingredienteBean.alterar}"/></div>
             
 	        </p:outputPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="deleteingrediente" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{ingredienteBean.ingredienteKey}?"/>
+            <h:inputHidden value="#{ingredienteBean.ingredienteKey}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{ingredienteBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    

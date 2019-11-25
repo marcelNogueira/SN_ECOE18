@@ -24,16 +24,19 @@ public class AbstractDAO<T, K> {
 		entityManager.getTransaction().begin();
 		entityManager.persist(obj);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 	public void update(T obj) {
 		entityManager.getTransaction().begin();
 		entityManager.merge(obj);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 	public void delete (T obj) {
 		entityManager.getTransaction().begin();
 		entityManager.remove(obj);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 	public void deleteKey (K key) {
 		T obj = this.find(key);

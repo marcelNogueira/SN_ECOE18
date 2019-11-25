@@ -29,6 +29,7 @@ public class CacadorBean implements Serializable {
 	private Cacador cacador = new Cacador(); 
 	private CacadorDAO cdao = new CacadorDAO(); 
 	private List<Cacador> cacadors = cdao.findAll();
+	private String key;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
@@ -86,11 +87,21 @@ public class CacadorBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		cdao.update(cacador);
+		if(lugarId!=null) {
+			cacador.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			cdao.update(cacador);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		cdao.deleteKey(cacador.getNome());
+		cdao.deleteKey(key);
 		return "/index";
 	}
 	public String consultar() {

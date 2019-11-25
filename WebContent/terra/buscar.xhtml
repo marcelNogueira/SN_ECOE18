@@ -12,7 +12,7 @@
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
-				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
+				<!-- <div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div> -->
 				<p:accordionPanel value="#{terraBean.terras}" var="terra">
 					<p:tab title="#{terra.descricao}">
 						<h:panelGrid columns="2" cellpadding="5">
@@ -31,10 +31,7 @@
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
 	              <f:setPropertyActionListener value="#{terra}" target="#{terraBean.terra}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteterra" oncomplete="PF('deleteDialog').show()" title="Excluir">
-	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{terra}" target="#{terraBean.terra}" />
-              </p:commandLink>
+              
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
@@ -58,13 +55,6 @@
 	        </p:outputPanel>
 		    </p:dialog>
 		    
-		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteterra" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{terraBean.terra.descricao}?"/>
-            <h:inputHidden value="#{terraBean.terra.lugarId}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{terraBean.excluir}"/></div>
-	        </p:outputPanel>
-		    </p:dialog>
 		    
 			</h:form>
 		</f:view>

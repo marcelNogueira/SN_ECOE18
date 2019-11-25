@@ -36,7 +36,7 @@
               </p:commandLink>
               <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{arma}" target="#{armaBean.arma}" />
+	              <f:setPropertyActionListener value="#{arma.nome}" target="#{armaBean.armaKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -58,8 +58,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="delete" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{armaBean.arma.nome}?"/>
-            <h:inputHidden value="#{armaBean.arma.nome}"/>
+	        	<h:outputText value="Deseja excluir #{armaBean.armaKey}?"/>
+            <h:inputHidden value="#{armaBean.armaKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{armaBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

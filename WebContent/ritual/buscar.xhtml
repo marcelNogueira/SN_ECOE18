@@ -39,7 +39,7 @@
               </p:commandLink>
               <p:commandLink update=":form:deleteritual" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{ritual}" target="#{ritualBean.ritual}" />
+	              <f:setPropertyActionListener value="#{ritual.ritualId}" target="#{ritualBean.ritualKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -66,8 +66,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="deleteritual" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{ritualBean.ritual.objetivo}?"/>
-            <h:inputHidden value="#{ritualBean.ritual.ritualId}"/>
+	        	<h:outputText value="Deseja excluir #{ritualBean.ritualKey}?"/>
+            <h:inputHidden value="#{ritualBean.ritualKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{ritualBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

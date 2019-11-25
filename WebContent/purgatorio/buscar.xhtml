@@ -12,7 +12,7 @@
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
-				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
+				<!-- <div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div> -->
 				<p:accordionPanel value="#{purgatorioBean.purgatorios}" var="purgatorio">
 					<p:tab title="#{purgatorio.descricao}">
 						<h:panelGrid columns="2" cellpadding="5">
@@ -33,10 +33,7 @@
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
 	              <f:setPropertyActionListener value="#{purgatorio}" target="#{purgatorioBean.purgatorio}" />
               </p:commandLink>
-              <p:commandLink update=":form:deletepurgatorio" oncomplete="PF('deleteDialog').show()" title="Excluir">
-	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{purgatorio}" target="#{purgatorioBean.purgatorio}" />
-              </p:commandLink>
+              
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
@@ -61,13 +58,7 @@
 		    
 		    
 		    
-		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deletepurgatorio" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{purgatorioBean.purgatorio.descricao}?"/>
-            <h:inputHidden value="#{purgatorioBean.purgatorio.lugarId}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{purgatorioBean.excluir}"/></div>
-	        </p:outputPanel>
-		    </p:dialog>
+		    
 		    
 			</h:form>
 		</f:view>

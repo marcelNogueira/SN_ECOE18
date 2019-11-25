@@ -70,7 +70,7 @@
               </p:commandLink>
               <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{demonio}" target="#{demonioBean.demonio}" />
+	              <f:setPropertyActionListener value="#{demonio.nome}" target="#{demonioBean.demonioKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -79,17 +79,12 @@
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
             <div><label>Nome</label></div>
-						<div><h:inputText value="#{demonioBean.demonio.nome}" size="50"/></div>
+						<div><h:inputText value="#{demonioBean.demonio.nome}" size="50" readonly="true"/></div>
+						<div><h:inputHidden value="#{demonioBean.demonio.nome}" /></div>
 						<div><label>Status</label></div>
 						<div>
 							<p:selectOneMenu class="select-dropdown" value="#{demonioBean.demonio.status}">
 								<f:selectItems value="#{demonioBean.statusSer}"/>
-							</p:selectOneMenu>
-						</div>
-						<div><label>Evento</label></div>
-						<div>
-							<p:selectOneMenu class="select-dropdown" value="#{demonioBean.demonio.evento}" label="Evento">
-								<f:selectItems value="#{demonioBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
 							</p:selectOneMenu>
 						</div>
 						<div><label>Lugar</label></div>
@@ -136,8 +131,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="delete" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{demonioBean.demonio.nome}?"/>
-            <h:inputHidden value="#{demonioBean.demonio.nome}"/>
+	        	<h:outputText value="Deseja excluir #{demonioBean.demonioKey}?"/>
+            <h:inputHidden value="#{demonioBean.demonioKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{demonioBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

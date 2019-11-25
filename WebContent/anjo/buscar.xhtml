@@ -72,7 +72,7 @@
               </p:commandLink>
               <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{anjo}" target="#{anjoBean.anjo}" />
+	              <f:setPropertyActionListener value="#{anjo.nome}" target="#{anjoBean.anjoKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -89,12 +89,6 @@
 						<div>
 							<p:selectOneMenu class="select-dropdown" value="#{anjoBean.anjo.status}">
 								<f:selectItems value="#{anjoBean.statusSer}"/>
-							</p:selectOneMenu>
-						</div>
-						<div><label>Evento</label></div>
-						<div>
-							<p:selectOneMenu class="select-dropdown" value="#{anjoBean.anjo.evento}" label="Evento">
-								<f:selectItems value="#{anjoBean.eventos}" var="e" itemValue="#{e}" itemLabel="#{e.fato}"/>
 							</p:selectOneMenu>
 						</div>
 						<div><label>Lugar</label></div>
@@ -139,8 +133,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="delete" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{anjoBean.anjo.nome}?"/>
-            <h:inputHidden value="#{anjoBean.anjo.nome}"/>
+	        	<h:outputText value="Deseja excluir #{anjoBean.anjoKey}?"/>
+            <h:inputHidden value="#{anjoBean.anjoKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{anjoBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

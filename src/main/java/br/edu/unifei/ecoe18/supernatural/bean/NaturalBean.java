@@ -29,6 +29,7 @@ public class NaturalBean implements Serializable {
 	private Natural natural = new Natural(); 
 	private NaturalDAO ndao = new NaturalDAO(); 
 	private List<Natural> naturals = ndao.findAll();
+	private String naturalKey;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
@@ -87,11 +88,21 @@ public class NaturalBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		ndao.update(natural);
+		if(lugarId!=null) {
+			natural.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			ndao.update(natural);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		ndao.deleteKey(natural.getNome());
+		ndao.deleteKey(naturalKey);
 		return "/index";
 	}
 	public String consultar() {

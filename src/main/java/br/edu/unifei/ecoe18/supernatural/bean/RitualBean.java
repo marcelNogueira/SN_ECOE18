@@ -21,6 +21,7 @@ public class RitualBean implements Serializable {
 	private Ritual ritual = new Ritual(); 
 	private RitualDAO rdao = new RitualDAO();
 	private List<Ritual> rituais = rdao.findAll();
+	private int ritualKey;
 	
 	private IngredienteDAO ingredienteDao = new IngredienteDAO();
 	private List<Ingrediente> ingredientes = ingredienteDao.findAll();
@@ -64,7 +65,7 @@ public class RitualBean implements Serializable {
 		return "/index";
 	}
 	public String excluir() {
-		rdao.deleteKey(ritual.getRitualId());
+		rdao.deleteKey(ritualKey);
 		return "/index";
 	}
 	public String consultar() {

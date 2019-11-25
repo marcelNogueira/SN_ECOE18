@@ -31,6 +31,7 @@ public class CriaturaBean implements Serializable {
 	private Criatura criatura = new Criatura(); 
 	private CriaturaDAO cdao = new CriaturaDAO();
 	private List<Criatura> criaturas = cdao.findAll();
+	private String key;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
@@ -92,11 +93,21 @@ public class CriaturaBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		cdao.update(criatura);
+		if(lugarId!=null) {
+			criatura.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			cdao.update(criatura);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		cdao.deleteKey(criatura.getNome());
+		cdao.deleteKey(key);
 		return "/index";
 	}
 	public String consultar() {

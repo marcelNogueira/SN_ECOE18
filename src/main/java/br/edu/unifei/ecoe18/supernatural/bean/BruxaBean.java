@@ -33,6 +33,7 @@ public class BruxaBean implements Serializable {
 	private Bruxa bruxa = new Bruxa(); 
 	private BruxaDAO bdao = new BruxaDAO(); 
 	private List<Bruxa> bruxas = bdao.findAll();
+	private String bruxaKey;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
@@ -100,11 +101,21 @@ public class BruxaBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		bdao.update(bruxa);
+		if(lugarId!=null) {
+			bruxa.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			bdao.update(bruxa);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		bdao.deleteKey(bruxa.getNome());
+		bdao.deleteKey(bruxaKey);
 		return "/index";
 	}
 	public String consultar() {

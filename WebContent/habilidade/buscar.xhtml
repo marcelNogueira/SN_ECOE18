@@ -8,6 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+<ui:define name="title">Habilidade</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
@@ -27,7 +28,7 @@
               </p:commandLink>
               <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{habilidade.nome}" target="#{habilidadeBean.habilidadeKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -36,8 +37,8 @@
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
             <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
+						<div><h:inputText value="#{habilidadeBean.habilidade.nome}" readonly="true"/></div>
+						<div><h:inputHidden value="#{habilidadeBean.habilidade.nome}"/></div>
             <div><label>Descrição</label></div>
             <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
 						
@@ -48,8 +49,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
+	        	<h:outputText value="Deseja excluir #{habilidadeBean.habilidadeKey}?"/>
+            <h:inputHidden value="#{habilidadeBean.habilidadeKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>

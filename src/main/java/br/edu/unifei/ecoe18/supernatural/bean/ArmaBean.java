@@ -20,6 +20,7 @@ public class ArmaBean implements Serializable {
 	private ArmaDAO adao = new ArmaDAO(); 
 	private Arma arma = new Arma(); 
 	private List<Arma> armas = adao.findAll();
+	private String armaKey;
 	
 	public String inserir() {
 		adao.create(arma);
@@ -60,7 +61,7 @@ public class ArmaBean implements Serializable {
 		return "/index";
 	}
 	public String excluir() {
-		adao.deleteKey(arma.getNome());
+		adao.deleteKey(armaKey);
 		return "/index";
 	}
 	public String consultar() {

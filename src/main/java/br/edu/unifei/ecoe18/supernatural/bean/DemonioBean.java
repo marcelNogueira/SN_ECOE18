@@ -32,6 +32,7 @@ public class DemonioBean implements Serializable {
 	private Demonio demonio = new Demonio(); 
 	private DemonioDAO ddao = new DemonioDAO(); 
 	private List<Demonio> demonios = ddao.findAll();
+	private String demonioKey;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
@@ -96,11 +97,21 @@ public class DemonioBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		ddao.update(demonio);
+		if(lugarId!=null) {
+			demonio.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			ddao.update(demonio);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		ddao.deleteKey(demonio.getNome());
+		ddao.deleteKey(demonioKey);
 		return "/index";
 	}
 	public String consultar() {

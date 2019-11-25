@@ -31,6 +31,7 @@ public class FantasmaBean implements Serializable {
 	private Fantasma fantasma = new Fantasma(); 
 	private FantasmaDAO fdao = new FantasmaDAO(); 
 	private List<Fantasma> fantasmas = fdao.findAll();
+	private String fantasmaKey;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
@@ -93,11 +94,21 @@ public class FantasmaBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		fdao.update(fantasma);
+		if(lugarId!=null) {
+			fantasma.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			fdao.update(fantasma);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		fdao.deleteKey(fantasma.getNome());
+		fdao.deleteKey(fantasmaKey);
 		return "/index";
 	}
 	public String consultar() {

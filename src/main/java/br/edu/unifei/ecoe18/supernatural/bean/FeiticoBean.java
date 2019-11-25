@@ -22,6 +22,7 @@ public class FeiticoBean implements Serializable{
 	private Feitico feitico = new Feitico(); 
 	private FeiticoDAO fdao = new FeiticoDAO(); 
 	private List<Feitico> feiticos = fdao.findAll();
+	private int feiticoKey;
 	
 	private IngredienteDAO idao = new IngredienteDAO();
 	private List<Ingrediente> ingredientes = idao.findAll();
@@ -65,7 +66,7 @@ public class FeiticoBean implements Serializable{
 		return "/index";
 	}
 	public String excluir() {
-		fdao.deleteKey(feitico.getFeiticoId());
+		fdao.deleteKey(feiticoKey);
 		return "/index";
 	}
 	public String consultar() {

@@ -32,6 +32,7 @@ public class EncruzilhadaBean implements Serializable {
 	private Encruzilhada encruzilhada = new Encruzilhada(); 
 	private EncruzilhadaDAO edao = new EncruzilhadaDAO(); 
 	private List<Encruzilhada> encruzilhadas = edao.findAll();
+	private String encruzilhadaKey;
 	
 	//extends Ser
 	private StatusEnum[] statusSer = StatusEnum.values();
@@ -96,11 +97,21 @@ public class EncruzilhadaBean implements Serializable {
 		}
 	}
 	public String alterar() {
-		edao.update(encruzilhada);
+		if(lugarId!=null) {
+			encruzilhada.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			edao.update(encruzilhada);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String excluir() {
-		edao.deleteKey(encruzilhada.getNome());
+		edao.deleteKey(encruzilhadaKey);
 		return "/index";
 	}
 	public String consultar() {

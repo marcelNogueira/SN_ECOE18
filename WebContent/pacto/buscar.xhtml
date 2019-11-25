@@ -21,9 +21,9 @@
 							<div><label>Objetivo</label></div>
 							<h:outputText value="#{pacto.objetivo}"/>
 							<div><label>Pessoa</label></div>
-							<h:outputText value="#{pacto.pessoa}"/>
+							<h:outputText value="#{pacto.pessoa.nome}"/>
 							<div><label>Demonio</label></div>
-							<h:outputText value="#{pacto.demonio}"/>
+							<h:outputText value="#{pacto.demonio.nome}"/>
 							
 							<p:commandLink update=":form:update" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
@@ -31,7 +31,7 @@
               </p:commandLink>
               <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{pacto}" target="#{pactoBean.pacto}" />
+	              <f:setPropertyActionListener value="#{pacto.enventoId}" target="#{pactoBean.pactoKey}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
@@ -39,6 +39,7 @@
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
+            <div><h:inputHidden value="#{pactoBean.pacto.enventoId}"/></div>
             <div><label>Fato</label></div>
 						<div><h:inputText value="#{pactoBean.pacto.fato}" size="50"/></div>
 						
@@ -54,7 +55,7 @@
 						<div><label>Demonio</label></div>
 						<div>
 							<p:selectOneMenu class="select-dropdown" value="#{pactoBean.encruzilhadaNome}">
-								<f:selectItems value="#{pactoBean.encruzilhadaNome}" var="d" itemValue="#{d.nome}" itemLabel="#{d.nome}"/>
+								<f:selectItems value="#{pactoBean.encruzilhadas}" var="d" itemValue="#{d.nome}" itemLabel="#{d.nome}"/>
 							</p:selectOneMenu>
 						</div>
 						
@@ -65,8 +66,8 @@
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:outputPanel id="delete" style="text-align:center;">
-	        	<h:outputText value="Deseja excluir #{pactoBean.pacto.fato}?"/>
-            <h:inputHidden value="#{pactoBean.pacto.enventoId}"/>
+	        	<h:outputText value="Deseja excluir #{pactoBean.pactoKey}?"/>
+            <h:inputHidden value="#{pactoBean.pactoKey}"/>
             <div class="send-button"><h:commandButton value="Excluir" action="#{pactoBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
