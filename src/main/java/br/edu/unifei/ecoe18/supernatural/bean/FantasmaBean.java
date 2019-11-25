@@ -49,7 +49,17 @@ public class FantasmaBean implements Serializable {
 	private List<Habilidade> habilidades = habilidadeDao.findAll();
 		
 	public String inserir() {
-		fdao.create(fantasma);
+		if(lugarId!=null) {
+			fantasma.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			fdao.create(fantasma);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String buscarConsultar() {

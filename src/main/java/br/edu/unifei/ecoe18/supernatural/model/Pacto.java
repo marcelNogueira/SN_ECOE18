@@ -11,9 +11,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Pacto extends Evento {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5710795874619317693L;
 	private String objetivo;
 	@OneToOne

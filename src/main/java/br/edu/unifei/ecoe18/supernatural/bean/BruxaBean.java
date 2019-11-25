@@ -55,7 +55,18 @@ public class BruxaBean implements Serializable {
 	private List<Feitico> feiticos = fdao.findAll();
 	
 	public String inserir() {
-		bdao.create(bruxa);
+		if(lugarId!=null) {
+			bruxa.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			bdao.create(bruxa);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
+		
 		return "/index";
 	}
 	public String buscarConsultar() {

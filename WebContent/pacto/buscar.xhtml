@@ -8,49 +8,66 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+<ui:define name="title">Pacto</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{pactoBean.pactos}" var="pacto">
+					<p:tab title="#{pacto.fato}">
 						<h:panelGrid columns="2" cellpadding="5">
-							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<div><label>Fato</label></div>
+							<h:outputText value="#{pacto.fato}"/>
+							<div><label>Objetivo</label></div>
+							<h:outputText value="#{pacto.objetivo}"/>
+							<div><label>Pessoa</label></div>
+							<h:outputText value="#{pacto.pessoa}"/>
+							<div><label>Demonio</label></div>
+							<h:outputText value="#{pacto.demonio}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
-							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<p:commandLink update=":form:update" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{pacto}" target="#{pactoBean.pacto}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{pacto}" target="#{pactoBean.pacto}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
-            <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
+            <div><label>Fato</label></div>
+						<div><h:inputText value="#{pactoBean.pacto.fato}" size="50"/></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+						<div><label>Objetivo</label></div>
+						<div><h:inputText value="#{pactoBean.pacto.objetivo}" size="50"/></div>
+						
+						<div><label>Pessoa</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{pactoBean.naturalNome}">
+								<f:selectItems value="#{pactoBean.naturais}" var="n" itemValue="#{n.nome}" itemLabel="#{n.nome}"/>
+							</p:selectOneMenu>
+						</div>
+						<div><label>Demonio</label></div>
+						<div>
+							<p:selectOneMenu class="select-dropdown" value="#{pactoBean.encruzilhadaNome}">
+								<f:selectItems value="#{pactoBean.encruzilhadaNome}" var="d" itemValue="#{d.nome}" itemLabel="#{d.nome}"/>
+							</p:selectOneMenu>
+						</div>
+						
+            <div class="send-button"><h:commandButton value="Alterar" action="#{pactoBean.alterar}"/></div>
             
-	        </p:outputPanel>
+	        </p:scrollPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="delete" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{pactoBean.pacto.fato}?"/>
+            <h:inputHidden value="#{pactoBean.pacto.enventoId}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{pactoBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    
@@ -59,13 +76,3 @@
 	</ui:define>
 </ui:composition>
 </html>
-
-
-
-
-
-
-
-
-
-

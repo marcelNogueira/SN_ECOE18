@@ -8,49 +8,90 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../template.xhtml">
+<ui:define name="title">Caçada</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form id="form">
 				<div class="send-button"><h:commandButton value="Inserir" action="inserir" style="margin-bottom: 3px;"/></div>
-				<p:accordionPanel value="#{habilidadeBean.habilidades}" var="habilidade">
-					<p:tab title="#{habilidade.nome}">
+				<p:accordionPanel value="#{cacadaBean.cacadas}" var="cacada">
+					<p:tab title="#{cacada.fato}">
 						<h:panelGrid columns="2" cellpadding="5">
-							<div><label>Nome</label></div>
-							<h:outputText value="#{habilidade.nome}"/>
+							<div><label>Fato</label></div>
+							<h:outputText value="#{cacada.fato}"/>
 							
-							<div><label>Descrição</label></div>
-							<h:outputText value="#{habilidade.descricao}"/>
+							<p:outputPanel rendered="#{not empty cacada.vitimas}">
+								<div><label>Vítimas</label></div>
+								<h:form>
+									<p:dataList value="#{cacada.vitimas}" var="vitima">
+							        #{vitima.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
 							
-							<p:commandLink update=":form:updateHabilidade" oncomplete="PF('updateDialog').show()" title="Alterar">
+							<p:outputPanel rendered="#{not empty cacada.cacadores}">
+								<div><label>Caçadores</label></div>
+								<h:form>
+									<p:dataList value="#{cacada.cacadores}" var="cacador">
+							        #{cacador.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:outputPanel rendered="#{not empty cacada.cacas}">
+								<div><label>Monstros</label></div>
+								<h:form>
+									<p:dataList value="#{cacada.cacas}" var="cacas">
+							        #{cacas.nome}
+							    </p:dataList>
+								</h:form>
+							</p:outputPanel>
+							
+							<p:commandLink update=":form:update" oncomplete="PF('updateDialog').show()" title="Alterar">
 	              <div class="send-button"><h:commandButton value="Alterar"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{cacada}" target="#{cacadaBean.cacada}" />
               </p:commandLink>
-              <p:commandLink update=":form:deleteHabilidade" oncomplete="PF('deleteDialog').show()" title="Excluir">
+              <p:commandLink update=":form:delete" oncomplete="PF('deleteDialog').show()" title="Excluir">
 	              <div class="send-button"><h:commandButton value="Excluir"/></div>
-	              <f:setPropertyActionListener value="#{habilidade}" target="#{habilidadeBean.habilidade}" />
+	              <f:setPropertyActionListener value="#{cacada}" target="#{cacadaBean.cacada}" />
               </p:commandLink>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>			
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="updateHabilidade" style="text-align:left;">
-            <div><label>Nome</label></div>
-            <!-- <div><h:outputText value="#{habilidadeBean.habilidade.nome}"/></div> -->
-						<div><h:inputText value="#{habilidadeBean.habilidade.nome}"/></div>
-            <div><label>Descrição</label></div>
-            <div><h:inputText value="#{habilidadeBean.habilidade.descricao}" /></div>
+	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
+            <div><label>Fato</label></div>
+						<div><h:inputText value="#{cacadaBean.cacada.fato}" size="50"/></div>
 						
-            <div class="send-button"><h:commandButton value="Alterar" action="#{habilidadeBean.alterar}"/></div>
+						<div><label>Vítimas</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{cacadaBean.cacada.vitimas}" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{cacadaBean.naturais}" var="n" itemValue="#{n}" itemLabel="#{n.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Caçadores</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{cacadaBean.cacada.cacadores}" multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{cacadaBean.cacadores}" var="c" itemValue="#{c}" itemLabel="#{c.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						<div><label>Monstros</label></div>
+						<div>
+							<p:selectCheckboxMenu class="select-dropdown" value="#{cacadaBean.cacada.cacas}"multiple="true" filter="true" filterMatchMode="startsWith">
+						    <f:selectItems value="#{cacadaBean.sobrenaturais}" var="s" itemValue="#{s}" itemLabel="#{s.nome}" />
+							</p:selectCheckboxMenu>
+						</div>
+						
+            <div class="send-button"><h:commandButton value="Alterar" action="#{cacadaBean.alterar}"/></div>
             
-	        </p:outputPanel>
+	        </p:scrollPanel>
 		    </p:dialog>
 		    
 		    <p:dialog header="Exluir" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="deleteHabilidade" style="text-align:center;">
-	        	<h:outputText rendered="#{not empty habilidadeBean.habilidade}" value="Deseja excluir #{habilidadeBean.habilidade.nome}?"/>
-            <h:inputHidden value="#{habilidadeBean.habilidade.nome}"/>
-            <div class="send-button"><h:commandButton value="Excluir" action="#{habilidadeBean.excluir}"/></div>
+	        <p:outputPanel id="delete" style="text-align:center;">
+	        	<h:outputText value="Deseja excluir #{cacadaBean.cacada.fato}?"/>
+            <h:inputHidden value="#{cacadaBean.cacada.enventoId}"/>
+            <div class="send-button"><h:commandButton value="Excluir" action="#{cacadaBean.excluir}"/></div>
 	        </p:outputPanel>
 		    </p:dialog>
 		    
@@ -59,13 +100,3 @@
 	</ui:define>
 </ui:composition>
 </html>
-
-
-
-
-
-
-
-
-
-

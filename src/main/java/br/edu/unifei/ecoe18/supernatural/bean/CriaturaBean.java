@@ -49,7 +49,16 @@ public class CriaturaBean implements Serializable {
 	private List<Habilidade> habilidades = habilidadeDao.findAll();
 		
 	public String inserir() {
-		cdao.create(criatura);
+		if(lugarId!=null) {
+			criatura.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			cdao.create(criatura);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
 		return "/index";
 	}
 	public String buscarConsultar() {

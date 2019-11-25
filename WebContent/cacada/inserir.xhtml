@@ -3,17 +3,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="../template.xhtml">
-	<ui:define name="title">Inserir Habilidade</ui:define>
+	<ui:define name="title">Inserir Caçada</ui:define>
 	<ui:define name="conteudo2">
 		<f:view>
 			<h:form>
-				<div><label>Nome</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.nome}" size="50"/></div>
-				<div><label>Descrição</label></div>
-				<div><h:inputText value="#{habilidadeBean.habilidade.descricao}" size="50"/></div>
-				<div class="send-button"><h:commandButton value="Inserir" action="#{habilidadeBean.inserir}"/></div>
+				<div><label>Fato</label></div>
+				<div><h:inputText value="#{cacadaBean.cacada.fato}" size="50"/></div>
+				
+				<div><label>Vítimas</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{cacadaBean.cacada.vitimas}" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{cacadaBean.naturais}" var="n" itemValue="#{n}" itemLabel="#{n.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Caçadores</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{cacadaBean.cacada.cacadores}" multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{cacadaBean.cacadores}" var="c" itemValue="#{c}" itemLabel="#{c.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				<div><label>Monstros</label></div>
+				<div>
+					<p:selectCheckboxMenu class="select-dropdown" value="#{cacadaBean.cacada.cacas}"multiple="true" filter="true" filterMatchMode="startsWith">
+				    <f:selectItems value="#{cacadaBean.sobrenaturais}" var="s" itemValue="#{s}" itemLabel="#{s.nome}" />
+					</p:selectCheckboxMenu>
+				</div>
+				
+				
+				<div class="send-button"><h:commandButton value="Inserir" action="#{cacadaBean.inserir}"/></div>
 			</h:form>
 		</f:view>
 	</ui:define>

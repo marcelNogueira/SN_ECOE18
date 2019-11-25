@@ -43,7 +43,17 @@ public class NaturalBean implements Serializable {
 	private List<Arma> armas = armaDao.findAll();
 	
 	public String inserir() {
-		ndao.create(natural);
+		if(lugarId!=null) {
+			natural.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			ndao.create(natural);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String buscarConsultar() {

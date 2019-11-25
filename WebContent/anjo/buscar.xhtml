@@ -80,8 +80,11 @@
 				
 				<p:dialog header="Atualizar" widgetVar="updateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 	        <p:scrollPanel id="update" mode="native" style="text-align:left; height: 600px;">
-            <div><label>Nome</label></div>
-						<div><h:inputText value="#{anjoBean.anjo.nome}" size="50"/></div>
+            <!-- <div><label>Nome</label></div>
+						<div><h:inputText value="#{anjoBean.anjo.nome}" size="50"/></div> -->
+						<div><label>Nome</label></div>
+						<div><h:inputText value="#{anjoBean.anjo.nome}" readonly="true"/></div>
+						<h:inputHidden value="#{anjoBean.anjo.nome}" />
 						<div><label>Status</label></div>
 						<div>
 							<p:selectOneMenu class="select-dropdown" value="#{anjoBean.anjo.status}">

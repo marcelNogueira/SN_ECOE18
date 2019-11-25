@@ -52,7 +52,17 @@ public class EncruzilhadaBean implements Serializable {
 	private NivelEnum[] niveis = NivelEnum.values();
 		
 	public String inserir() {
-		edao.create(encruzilhada);
+		if(lugarId!=null) {
+			encruzilhada.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			edao.create(encruzilhada);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
+		
 		return "/index";
 	}
 	public String buscarConsultar() {

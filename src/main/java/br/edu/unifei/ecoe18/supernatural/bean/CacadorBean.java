@@ -43,7 +43,16 @@ public class CacadorBean implements Serializable {
 	private List<Arma> armas = armaDao.findAll();
 		
 	public String inserir() {
-		cdao.create(cacador);
+		if(lugarId!=null) {
+			cacador.setLugar(lugarDao.find(lugarId));		
+		}
+		try {
+			cdao.create(cacador);
+		}catch (Exception e) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage("j� existe nome"));	
+			return "inserir";
+		}
 		return "/index";
 	}
 	public String buscarConsultar() {
